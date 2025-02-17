@@ -1,12 +1,11 @@
-import openai
-import os
-import json
-import config.config as config
-from messageValidate import validate_response_with_ai
-from fileRead import loadPromptFromMarkdown
+import openai; import os; import json
+from dotenv import load_dotenv
+from instruction_logic.messageValidate import validate_response_with_ai
+from helper.file import loadPromptFromMarkdown
 
-# OpenAI API 키 설정 (보안을 위해 환경변수 사용 추천)
-client = openai.OpenAI(api_key=config.GPT_API_KEY)
+
+load_dotenv()
+client = openai.OpenAI(api_key=os.getenv("GPT_API_KEY"))
 
 # 📂 instruction 폴더 안의 prompt.md 파일을 불러오기
 PROMPT_PATH = os.path.join("instruction", "messageCreatePrompt.md")
@@ -18,7 +17,7 @@ def sendToAi(description):
 
     print("AI 요청 시작 ... ✅")
     response = client.chat.completions.create(
-        model=config.GPT_MODEL,
+        model=os.getenv("GPT_MODEL"),
         messages=[
             {"role": "system", "content": "당신은 E-커머스 고객들의 메세지에 응대하는 직원입니다. 사용자의 이메일을 분석하여 적절한 응답을 생성하세요."},
             {"role": "user", "content": prompt}

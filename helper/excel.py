@@ -1,12 +1,15 @@
 import pandas as pd
 import random  # 랜덤 숫자 생성을 위한 모듈
 
-def getRandomDataFromEbayExcel():
-    # 엑셀 파일 경로 (로컬 파일)
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-messages.xlsx"
+# 7000개의 무작위 데이터가 있는 ebay excel
+ebay_file_path = '/Users/t2023-m0072/Desktop/Codename_Master _Inc/ebay/ebay-messages.xlsx'
 
+# 사람이 검증한 ebay 데이터가 있는 excel
+ebay_category_file_path = '/Users/t2023-m0072/Desktop/Codename_Master_Inc/ebay/ebay-category.xlsx'
+
+def getRandomDataFromEbayExcel():
     # 엑셀 파일 읽기
-    df = pd.read_excel(file_path)
+    df = pd.read_excel(ebay_file_path)
 
     # 랜덤한 행 번호 선택 (1~7407, pandas는 0부터 시작하므로 0~7406)
     random_index = random.randint(0, 7406)  
@@ -15,11 +18,8 @@ def getRandomDataFromEbayExcel():
     return df.iloc[random_index, 4]
 
 def getRandomDatasFromEbayExcel(i):
-    # 📌 엑셀 파일 경로
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-messages.xlsx"
-
     # 📌 엑셀 파일 읽기 (첫 번째 행을 컬럼명으로 설정)
-    df = pd.read_excel(file_path, header=0)
+    df = pd.read_excel(ebay_file_path, header=0)
 
     # 📌 실제 행 개수를 기반으로 i 값을 조정
     max_rows = df.shape[0]  # 전체 행 개수
@@ -39,27 +39,22 @@ def getRandomDatasFromEbayExcel(i):
     return result
 
 def get_GENERAL_FromEbayCategoryExcel():
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-category.xlsx"
-    df = pd.read_excel(file_path, header=0)
+    df = pd.read_excel(ebay_category_file_path, header=0)
     return df.iloc[1:11, 4].dropna().tolist()  
 
 def get_PRICE_NEGOTIATION_FromEbayCategoryExcel():
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-category.xlsx"
-    df = pd.read_excel(file_path, header=0)
+    df = pd.read_excel(ebay_category_file_path, header=0)
     return df.iloc[11:21, 4].dropna().tolist()
 
 def get_REFUND_FromEbayCategoryExcel():
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-category.xlsx"
-    df = pd.read_excel(file_path, header=0)
+    df = pd.read_excel(ebay_category_file_path, header=0)
     return df.iloc[21:31, 4].dropna().tolist()
 
 def get_API_REQUIRED_FromEbayCategoryExcel():
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-category.xlsx"
-    df = pd.read_excel(file_path, header=0)
+    df = pd.read_excel(ebay_category_file_path, header=0)
     return df.iloc[31:41, 4].dropna().tolist()
 
 def get_HUMAN_REVIEW_FromEbayCategoryExcel():
-    file_path = "/Users/t2023-m0072/Desktop/ebay/ebay-category.xlsx"
-    df = pd.read_excel(file_path, header=0)
+    df = pd.read_excel(ebay_category_file_path, header=0)
     return df.iloc[41:51, 4].dropna().tolist() 
 
